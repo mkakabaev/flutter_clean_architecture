@@ -14,7 +14,7 @@ class <%= page_type %> extends StatefulWidget {
   State createState() => _<%= page_type %>State();
 }
 
-class _<%= page_type %>State extends PageState< <%= page_type %>, <%= page_bloc_type %>, <%= page_bloc_state_type %>> {
+class _<%= page_type %>State extends PageState<%- h.lt() %><%= page_type %>, <%= page_bloc_type %>, <%= page_bloc_state_type %>> {
 
   @override
   <%= page_bloc_type %> createBloc(PageController1 controller) => <%= page_bloc_type %>(controller);

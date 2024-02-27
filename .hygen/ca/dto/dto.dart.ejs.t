@@ -1,6 +1,7 @@
 ---
 to: <%= dto_dir %>/<%= name_file %>_dto.dart
 ---
+import 'dart:async';
 import 'package:json_annotation/json_annotation.dart';
 
 part '<%= name_file %>_dto.g.dart'; 
@@ -10,19 +11,24 @@ part '<%= name_file %>_dto.g.dart';
 class <%= nt %> {
   <%= nt %>({ 
     required this.string1, 
-    this.optionalBool = false,
-    this.conditionalString1 = "",
+    required this.string2, 
+    this.string3 = "",
   });
 
   @JsonKey(required: true)
   final String string1;
 
-  @JsonKey(name: 'other_key', defaultValue: false)
-  final bool optionalBool;
+  @JsonKey(required: true)
+  final String string2;
 
-  @JsonKey(includeFromJson: false, includeToJson: true)
-  final String conditionalString1;    
+  @JsonKey(name: 'other_key', includeFromJson: false, includeToJson: true, defaultValue: "")
+  final String string3;    
 
   factory <%= nt %>.fromJson(Map<String, dynamic> json) => _$<%= nt %>FromJson(json);
   Map<String, dynamic> toJson() => _$<%= nt %>ToJson(this);
 }
+
+// This is for compute() to be used by retrofit
+FutureOr<%- h.lt() %><%= nt %>> deserialize<%= nt %>(Map<String, dynamic> json) => <%= nt %>.fromJson(json);
+FutureOr<Map<String, dynamic>> serialize<%= nt %>(<%= nt %> object) => object.toJson();
+

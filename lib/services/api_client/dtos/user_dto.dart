@@ -1,6 +1,9 @@
+import 'dart:async';
+
+import 'package:json_annotation/json_annotation.dart';
+
 import 'package:mk_clean_architecture/features/auth/auth.dart';
 import 'package:mk_clean_architecture/features/users/users.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'user_dto.g.dart';
 
@@ -34,9 +37,10 @@ class UserDto {
   final int id;
 
   factory UserDto.fromJson(Map<String, dynamic> json) => _$UserDtoFromJson(json);
-
   Map<String, dynamic> toJson() => _$UserDtoToJson(this);
 }
+
+FutureOr<UserDto> deserializeUserDto(Map<String, dynamic> json) => UserDto.fromJson(json);
 
 extension UserDtoMapper on UserDto {
   CredentialsHint toCredentialsHint() => CredentialsHint(

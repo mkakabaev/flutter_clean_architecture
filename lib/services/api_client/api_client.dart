@@ -7,10 +7,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import 'dtos.dart';
+import 'dtos/dtos.dart';
 import 'retrofit/retrofit_entries.dart';
 
-export 'dtos.dart';
+export 'dtos/dtos.dart';
 
 base class BaseApiClient {
   late final RestClient _client;

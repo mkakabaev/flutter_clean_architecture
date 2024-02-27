@@ -110,6 +110,7 @@ module.exports = {
   helpers: {
     relative: (from, to) => path.relative(from, to),
     src: () => __dirname,
+    lt: () => '<',
     bold: (str) => `\x1b[1m${str}\x1b[22m`,
   },
   h2,

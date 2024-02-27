@@ -24,7 +24,7 @@ class _RestClient implements RestClient {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(request.toJson());
+    _data.addAll(await compute(serializeSignInRequestDto, request));
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SignInResponseDto>(Options(
       method: 'POST',
@@ -42,7 +42,7 @@ class _RestClient implements RestClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = SignInResponseDto.fromJson(_result.data!);
+    final value = await compute(deserializeSignInResponseDto, _result.data!);
     return value;
   }
 
@@ -70,7 +70,7 @@ class _RestClient implements RestClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = UsersDto.fromJson(_result.data!);
+    final value = await compute(deserializeUsersDto, _result.data!);
     return value;
   }
 
@@ -98,7 +98,7 @@ class _RestClient implements RestClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = UserDto.fromJson(_result.data!);
+    final value = await compute(deserializeUserDto, _result.data!);
     return value;
   }
 
@@ -126,7 +126,7 @@ class _RestClient implements RestClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = UserDto.fromJson(_result.data!);
+    final value = await compute(deserializeUserDto, _result.data!);
     return value;
   }
 
@@ -157,7 +157,7 @@ class _RestClient implements RestClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PostsDto.fromJson(_result.data!);
+    final value = await compute(deserializePostsDto, _result.data!);
     return value;
   }
 

@@ -13,7 +13,7 @@ module.exports = {
             dtos_dir = h.path.join(result.feature_dir, "data/dtos");
         } else {    
             if (result.service) {
-                dtos_dir = result.service_dir; // h.path.join(result.service_dir, "dtos");
+                dtos_dir = h.path.join(result.service_dir, "dtos");
             } else  {
                 throw new Error("Either --feature or --service is required");
             }

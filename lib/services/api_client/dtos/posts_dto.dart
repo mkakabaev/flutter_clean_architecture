@@ -1,5 +1,8 @@
-import 'package:mk_clean_architecture/features/posts/posts.dart';
+import 'dart:async';
+
 import 'package:json_annotation/json_annotation.dart';
+
+import 'package:mk_clean_architecture/features/posts/posts.dart';
 
 import 'post_dto.dart';
 
@@ -16,6 +19,8 @@ class PostsDto {
   factory PostsDto.fromJson(Map<String, dynamic> json) => _$PostsDtoFromJson(json);
   Map<String, dynamic> toJson() => _$PostsDtoToJson(this);
 }
+
+FutureOr<PostsDto> deserializePostsDto(Map<String, dynamic> json) => PostsDto.fromJson(json);
 
 extension PostsDtoMapper on PostsDto {
   Posts toPosts() => Posts(

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 class PageController1 {
   final BuildContext _buildContext;
 
-  PageController1({required BuildContext buildContext}) : _buildContext = buildContext;
+  PageController1({
+    required BuildContext buildContext,
+  }) : _buildContext = buildContext;
 
   void showError(MyError error) {
     if (!_buildContext.mounted) {

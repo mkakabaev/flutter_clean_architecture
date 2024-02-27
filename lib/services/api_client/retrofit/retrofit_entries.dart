@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart' as foundation;
 import 'package:retrofit/retrofit.dart';
 
-import '../dtos.dart';
+import '../dtos/dtos.dart';
 
 part 'retrofit_entries.g.dart';
 
-@RestApi()
+@RestApi(parser: Parser.FlutterCompute)
 abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
@@ -32,4 +33,24 @@ abstract class RestClient {
     @Path('id') required int userId,
     @Query('limit') int? limit,
   });
+}
+
+// const compute = foundation.compute;
+// 
+// TODO: switch to isolate pools
+//
+Future<R>compute<M, R>(foundation.ComputeCallback<M, R> callback, M message, {String? debugLabel}) {
+
+    final stopwatch2 = Stopwatch()..start();
+    callback(message);
+    stopwatch2.stop();
+    // print
+    print("Compute time without isolates: ${stopwatch2.elapsedMicroseconds } µs for $R parsing");
+
+    final stopwatch = Stopwatch()..start();
+    return foundation.compute(callback, message, debugLabel: debugLabel).then((value) {
+        stopwatch.stop();
+        print("Compute time: ${stopwatch.elapsedMicroseconds} µs for $R parsing");
+        return value;
+    });
 }
