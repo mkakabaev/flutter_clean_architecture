@@ -30,10 +30,10 @@ class UserDto {
   @JsonKey(defaultValue: '')
   final String firstName;
 
-  @JsonKey(name: 'image', required: true)
+  @JsonKey(name: 'image')
   final String? imageUrl;
 
-  @JsonKey(name: 'id', required: true)
+  @JsonKey(required: true)
   final int id;
 
   factory UserDto.fromJson(Map<String, dynamic> json) => _$UserDtoFromJson(json);

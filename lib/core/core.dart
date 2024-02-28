@@ -9,6 +9,7 @@ export 'src/object_state.dart';
 export 'src/widgets/page/page.dart';
 export 'src/widgets/widgets.dart';
 export 'src/validation.dart';
+export 'src/worker.dart';
 
 // We need this everywhere so we export is here
 export 'package:async/async.dart' show Result, AsyncCache;

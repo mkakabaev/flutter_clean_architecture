@@ -112,6 +112,9 @@ class AuthRepositoryImpl with LoggerObject, DescriptionProvider implements AuthR
   }
 }
 
+// ------------------------------------------------------------------------------------------------
+// Secure storage extension
+
 extension on AuthRepositoryImpl {
   static const _savedCredentialsStoredKey = 'auth';
 

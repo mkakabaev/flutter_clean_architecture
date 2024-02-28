@@ -18,6 +18,5 @@ class ErrorDto {
   final String? expiredAt;
 
   factory ErrorDto.fromJson(Map<String, dynamic> json) => _$ErrorDtoFromJson(json);
-
   Map<String, dynamic> toJson() => _$ErrorDtoToJson(this);
 }

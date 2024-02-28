@@ -9,7 +9,7 @@ part of 'user_dto.dart';
 UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['password', 'username', 'image', 'id'],
+    requiredKeys: const ['password', 'username', 'id'],
   );
   return UserDto(
     username: json['username'] as String,

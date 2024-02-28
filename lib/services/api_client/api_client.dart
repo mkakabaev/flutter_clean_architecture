@@ -9,8 +9,10 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'dtos/dtos.dart';
 import 'retrofit/retrofit_entries.dart';
+import 'retrofit/retrofit_workers.dart';
 
 export 'dtos/dtos.dart';
+export 'retrofit/retrofit_workers.dart' show initWorkers;
 
 base class BaseApiClient {
   late final RestClient _client;
@@ -19,6 +21,7 @@ base class BaseApiClient {
 
   BaseApiClient() {
     _dio.options.baseUrl = 'https://dummyjson.com';
+    _dio.transformer = RetrofitWorkerBridgeTransformer();
     // dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
     _dio.interceptors.add(PrettyDioLogger());
     _client = RestClient(_dio);
