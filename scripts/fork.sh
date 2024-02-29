@@ -1,9 +1,8 @@
 #!/bin/sh
 
-# 
-# This script clones an existing project to a new directory
-# It is used to create a new project from an existing one
-# 
+# ------------------------------------------------------------------------------------------------
+# This script clones an existing project to a new directory and replaces the project name
+# ------------------------------------------------------------------------------------------------
 
 die() {
     echo "\n$1" >&2
@@ -11,14 +10,14 @@ die() {
 }
 
 if [ $# -ne 2 ]; then
-    echo "\nClone existing project to new directory"
-    echo "Usage: sh fork.sh <new_project_name> <output_directory>"
-    exit 1
+    die "Clone existing project to new directory\nUsage: sh fork.sh <new_project_name> <output_directory>"
 fi
+
+# ------------------------------------------------------------------------------------------------
+# check project_name variable to be a valid snake_case string of length at least 2
 
 project_name=$1
 
-# check project_name variable to be a valid snake_case string of length at least 2
 if ! [[ $project_name =~ ^[a-z][a-z0-9_]*[a-z0-9]$ ]]; then
     die "Project name should be a valid snake_case string of length at least 2"
 fi
@@ -28,7 +27,9 @@ fi
 
 output_directory="$2/$project_name"
 
-# check the destination directory to not exist
+# ------------------------------------------------------------------------------------------------
+# check the destination directory to not exist (or to be empty)
+
 if [ -d $output_directory ]; then
     if [ -n "$(ls -A $output_directory)" ]; then
         die "Output directory <$output_directory> already exists and it is not empty"
@@ -37,23 +38,71 @@ fi
 
 mkdir -p $output_directory || die "Failed to create output directory"
 
+# ------------------------------------------------------------------------------------------------
 # copy the project files to the output directory
+
+echo "Copying project files to $output_directory..."
+
 script_dir=$(dirname $(readlink -f $0))
 parent_dir=$(dirname $script_dir)
-ignore_file=$script_dir/fork_ignore
-rsync -av --exclude-from=$ignore_file  $parent_dir/ $output_directory || die "Failed to copy project files"
 
+# Define the ignore patterns
+ignore_file=$(mktemp)
+cat <<EOF > $ignore_file
+
+.DS_Store
+.dart_tool/
+.git
+/build/
+.flutter-plugins
+.flutter-plugins-dependencies
+*.iml
+*.ipr
+*.iws
+.idea/
+/ios/Pods/
+/ios/.symlinks/
+/ios/Flutter/flutter_export_environment.sh
+/ios/Flutter/Generated.sh
+/ios/Flutter.podspec
+/ios/Runner/GeneratedPluginRegistrant.*
+/android/.gradle/
+/android/local.properties
+/android/**/gradle-wrapper.jar
+/android/**/GeneratedPluginRegistrant.java
+
+EOF
+
+# echo "Copying project files to $output_directory, ignore file: $ignore_file"
+rsync -a --exclude-from=$ignore_file  $parent_dir/ $output_directory || die "Failed to copy project files"
+rm $ignore_file
+
+# ------------------------------------------------------------------------------------------------
 # replace the project name in the copied files
-oldstring="mk_clean_architecture"
-if [[ "$(uname)" == "Darwin" ]]; then
-    find $output_directory -type f -exec grep -l $oldstring {} ';' | xargs sed -i '' -e "s/$oldstring/$project_name/g" 
-elif [[ "$(uname)" == "Linux" ]]; then
-    find $output_directory -type f -exec grep -l $oldstring {} ';' | xargs sed -i -e "s/$oldstring/$project_name/g" 
-else
-    echo "Unknown operating system"
-fi
 
+echo "Renaming the project..."
+
+oldstring="mk_clean_architecture"
+newstring=$project_name
+system_name=$(uname)
+
+find $output_directory -type f -exec grep -l "$oldstring" {} \; | while read -r file
+do
+    # echo "Replacing $oldstring with $newstring in $file"
+    if [[ "$system_name" == "Darwin" ]]; then
+        sed -i '' -e "s/$oldstring/$project_name/g" "$file" || die "sed failed for $file"
+    elif [[ "$system_name" == "Linux" ]]; then
+        sed -i -e "s/$oldstring/$project_name/g" "$file" || die "sed failed for $file"
+    else
+        echo "Unsupported operating system $system_name"
+    fi
+done
+
+# ------------------------------------------------------------------------------------------------
 # renaming the project name in the copied files
+
+echo "Renaming the project files..."
+
 cd $output_directory/android/app/src/main/kotlin/com/example || die "Failed to change directory"
 mv $oldstring $project_name || die "Failed to rename directory"
 
