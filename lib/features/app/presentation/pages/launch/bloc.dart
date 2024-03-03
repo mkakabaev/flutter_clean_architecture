@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:equatable/equatable.dart';
+
 import 'package:mk_clean_architecture/core/core.dart';
 import 'package:mk_clean_architecture/router.dart';
-import 'package:equatable/equatable.dart';
 
 import '../../../domain/entities/app_bootstrap_state.dart';
 import '../../../domain/use_cases/get_app_bootstrap_state.dart';

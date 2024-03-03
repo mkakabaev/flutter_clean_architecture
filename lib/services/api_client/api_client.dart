@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:mk_clean_architecture/core/core.dart';
-import 'package:mk_clean_architecture/features/users/users.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import 'package:mk_clean_architecture/core/core.dart';
+import 'package:mk_clean_architecture/features/users/users.dart';
 
 import 'dtos/dtos.dart';
 import 'retrofit/retrofit_entries.dart';
@@ -137,7 +138,7 @@ final class ApiClient extends BaseApiClient {
       );
 
   FutureResult<PostsDto> getPostsForUser({required UserId userId}) =>
-      sendRequest((client) => client.getPostsForUser(userId: userId.value));
+      sendRequest((client) => client.getPostsForUser(userId: userId.id));
 }
 
 typedef AuthorizedApiClientCredentials = ({

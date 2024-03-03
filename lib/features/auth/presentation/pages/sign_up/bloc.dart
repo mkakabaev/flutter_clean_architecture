@@ -1,6 +1,7 @@
-import 'package:mk_clean_architecture/router.dart';
 import 'package:equatable/equatable.dart';
+
 import 'package:mk_clean_architecture/core/core.dart';
+import 'package:mk_clean_architecture/router.dart';
 
 class SignUpPageBlocState extends Equatable {
   const SignUpPageBlocState();
@@ -15,11 +16,6 @@ class SignUpPageBloc extends PageBloc<SignUpPageBlocState> {
   }
 
   SignUpPageBloc._(super.initialState, super.pageController);
-
-  void completeWithSuccess([MyRouteTransition transition = MyRouteTransition.fade]) async {
-    // await getIt<LoginUseCase>()();
-    // getIt<HomeRoute>().go(transition: transition);
-  }
 
   void goToSignIn() {
     getIt<SignInRoute>().go();

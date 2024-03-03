@@ -5,7 +5,8 @@
         "dummyjson",
         "hygen",
         "Paramless",
-        "Riverpod"
+        "Riverpod",
+        "Multitouch"
     ],
 
     "files.exclude": {

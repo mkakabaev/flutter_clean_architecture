@@ -4,7 +4,7 @@ import 'package:mk_clean_architecture/features/auth/auth.dart';
 import 'package:mk_clean_architecture/features/posts/posts.dart';
 import 'package:mk_clean_architecture/features/users/users.dart';
 
-@LazySingleton()
+@lazySingleton
 class PostsRoute extends MyRoute with MyRouteParamlessGo {
   PostsRoute()
       : super(
@@ -13,28 +13,28 @@ class PostsRoute extends MyRoute with MyRouteParamlessGo {
         );
 }
 
-@LazySingleton()
+@lazySingleton
 class UserProfileRoute extends MyRoute with MyRouteParamlessGo {
   UserProfileRoute() : super(path: '/user-profile', builder: (_, __) => const UserProfilePage());
 }
 
-@LazySingleton()
+@lazySingleton
 class LaunchRoute extends MyRoute {
   LaunchRoute() : super(path: "/launch", builder: (_, __) => const LaunchPage());
 }
 
-@LazySingleton()
+@lazySingleton
 class BadRoutePageRoute extends MyRoute {
   BadRoutePageRoute() : super(path: "/404", builder: (_, state) => BadRoutePage(uri: state.extra as Uri));
 
   void go({required Uri uri}) => performGo(extra: uri);
 }
 
-@LazySingleton()
+@lazySingleton
 class SignInRoute extends MyRoute with MyRouteParamlessGo {
   SignInRoute()
       : super(
-          path: "/sign_in",
+          path: "/sign-in",
           builder: (_, __) => const SignIn(),
           routes: [
             getIt<SignUpRoute>(),
@@ -42,13 +42,13 @@ class SignInRoute extends MyRoute with MyRouteParamlessGo {
         );
 }
 
-@LazySingleton()
+@lazySingleton
 class SignUpRoute extends MyRoute with MyRouteParamlessGo {
   SignUpRoute()
-      : super(path: "signUp", builder: (_, __) => const SignUpPage());
+      : super(path: "sign-up", builder: (_, __) => const SignUpPage());
 }
 
-@LazySingleton()
+@lazySingleton
 class HomeRoute extends MyRoute {
   HomeRoute()
       : super(

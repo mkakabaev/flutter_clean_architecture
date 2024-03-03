@@ -14,6 +14,6 @@ export 'src/worker.dart';
 // We need this everywhere so we export is here
 export 'package:async/async.dart' show Result, AsyncCache;
 export 'package:rxdart/rxdart.dart' show ValueStream, BehaviorSubject, PublishSubject;
-export 'package:injectable/injectable.dart' show injectable, LazySingleton, Singleton;
+export 'package:injectable/injectable.dart' show injectable, LazySingleton, lazySingleton, Singleton;
 
 final getIt = GetIt.instance;

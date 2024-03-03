@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ------------------------------------------------------------------------------------------------
-# This script clones an existing project to a new directory and replaces the project name
+# This script clones the project into a new one with a different name
 # ------------------------------------------------------------------------------------------------
 
 die() {

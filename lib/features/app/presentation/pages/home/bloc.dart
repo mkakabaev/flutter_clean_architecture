@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
+
 import 'package:mk_clean_architecture/core/core.dart';
 import 'package:mk_clean_architecture/features/auth/auth.dart';
 import 'package:mk_clean_architecture/router.dart';
-import 'package:equatable/equatable.dart';
 
 class HomePageBlocState extends Equatable {
   const HomePageBlocState();

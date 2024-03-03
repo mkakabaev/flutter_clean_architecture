@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'injectable.dart';
@@ -26,6 +25,7 @@ class MyApp extends StatelessWidget {
       ),
       scrollBehavior: const MaterialScrollBehavior().copyWith(
         dragDevices: PointerDeviceKind.values.toSet(),
+        multitouchDragStrategy: MultitouchDragStrategy.latestPointer, // Disable double+ scroll speed. Since Flutter 3.19.0
       ),
     );
   }

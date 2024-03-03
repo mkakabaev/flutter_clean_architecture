@@ -1,7 +1,8 @@
-import 'package:mk_clean_architecture/router.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mk_clean_architecture/core/core.dart';
 import 'package:mk_kit/mk_kit.dart';
+
+import 'package:mk_clean_architecture/core/core.dart';
+import 'package:mk_clean_architecture/router.dart';
 
 import '../../../domain/entities/credentials_hint.dart';
 import '../../../domain/entities/sign_in_request.dart';

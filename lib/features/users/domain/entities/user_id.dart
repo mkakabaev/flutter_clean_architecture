@@ -1,5 +1,2 @@
-import 'package:mk_kit/mk_kit.dart';
-
-class UserId extends TaggedType<int> {
-  const UserId(super.value);
-}
+// Use Dart 3.3 extension type feature to add more safety to the user identifiers
+extension type UserId(int id) {}

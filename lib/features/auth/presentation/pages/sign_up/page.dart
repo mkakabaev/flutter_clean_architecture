@@ -1,6 +1,7 @@
-import 'package:mk_clean_architecture/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import 'package:mk_clean_architecture/core/core.dart';
 
 import 'bloc.dart';
 

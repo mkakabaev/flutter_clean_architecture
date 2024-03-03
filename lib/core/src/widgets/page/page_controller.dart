@@ -2,19 +2,19 @@ import 'package:mk_clean_architecture/core/core.dart';
 import 'package:flutter/material.dart';
 
 class PageController1 {
-  final BuildContext _buildContext;
+  final BuildContext _context;
 
   PageController1({
     required BuildContext buildContext,
-  }) : _buildContext = buildContext;
+  }) : _context = buildContext;
 
   void showError(MyError error) {
-    if (!_buildContext.mounted) {
+    if (!_context.mounted) {
       return;
     }
 
-    final theme = Theme.of(_buildContext);
-    ScaffoldMessenger.maybeOf(_buildContext)?.showSnackBar(
+    final theme = Theme.of(_context);
+    ScaffoldMessenger.maybeOf(_context)?.showSnackBar(
       SnackBar(
         content: Text(
           error.message,
@@ -28,15 +28,15 @@ class PageController1 {
   }
 
   void hideErrors() {
-    if (!_buildContext.mounted) {
+    if (!_context.mounted) {
       return;
     }
-    ScaffoldMessenger.maybeOf(_buildContext)?.hideCurrentSnackBar();
+    ScaffoldMessenger.maybeOf(_context)?.hideCurrentSnackBar();
   }
 
   bool get isTopmost {
-    if (_buildContext.mounted) {
-      if (ModalRoute.of(_buildContext)?.isCurrent == true) {
+    if (_context.mounted) {
+      if (ModalRoute.of(_context)?.isCurrent == true) {
         return true;
       }
     }
@@ -44,6 +44,6 @@ class PageController1 {
   }
 
   void dropFocus() {
-    FocusScope.of(_buildContext).requestFocus(FocusNode());
+    FocusScope.of(_context).requestFocus(FocusNode());
   }
 }
